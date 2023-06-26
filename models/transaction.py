@@ -14,4 +14,13 @@ class Transaction(db.Model):
     provided_book_id = db.Column(db.Integer, db.ForeignKey('books.id'), nullable=False)
     status = db.Column(db.String(30))
 
+class TransactionSchema(ma.Schema):
+    requester_id = fields.Integer(required=True)
+    provider_id = fields.Integer(required=True)
+    requested_book_id = fields.Integer(required=True)
+    provided_book_id = fields.Integer(required=True)
+    status = fields.String(required=True, validate=OneOf(VALID_STATUSES, error=f'Status must be one of: {VALID_STATUSES}'))
 
+    class Meta:
+        fields = ('id', 'requester_id', 'provider_id', 'requested_book_id', 'provided_book_id', 'status')
+        ordered = True
