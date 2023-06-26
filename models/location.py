@@ -2,7 +2,6 @@ from init import db, ma
 from marshmallow import fields
 from marshmallow.validate import Length
 
-VALID_STATUSES = ['Requested', 'Accepted', 'Declined', 'Completed']
 
 class Location(db.Model):
     __tablename__ = 'locations'
