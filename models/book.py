@@ -11,6 +11,8 @@ class Book(db.Model):
     genre = db.Column(db.String(100), nullable=True)
     publication_year = db.Column(db.Integer, nullable=True)
 
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
 
 class BookSchema(ma.Schema):
     title = fields.String(required=True, validate=Length(min=1, max=200, error='Title must be between 1 and 200 characters long'))

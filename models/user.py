@@ -11,6 +11,8 @@ class User(db.Model):
     password = db.Column(db.String(128))
     location_id = db.Column(db.Integer, db.ForeignKey('locations.id'), nullable=False)
 
+    books = db.relationship('Book', backref='owner', lazy='dynamic')
+    transactions = db.relationship('Transaction', backref='user', lazy='dynamic')
 
 class UserSchema(ma.Schema):
     username = fields.String(required=True, validate=Length(min=3, max=100, error='Username must be between 3 and 100 characters long'))
