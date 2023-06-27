@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from models.book import Book, BookSchema
+from models.location import Location, LocationSchema
 from models.user import User, UserSchema
 from init import db
 from sqlalchemy import or_
@@ -26,6 +27,7 @@ def one_book(book_id):
         return {"error": "Book not found"}, 404
     return BookSchema().dump(book), 200
 
+
 # SEARCH for a book via title (author next?)
 @books_bp.route('/search', methods=['GET'])
 def search_books():
@@ -37,5 +39,13 @@ def search_books():
             Book.title.ilike(f"%{search_query}%"), # THINK ABOUT SETTING LOWER BOUNDS FOR LENGTH OF SEARCH QUERY
             Book.author.ilike(f"%{search_query}")
         ))
+    print(stmt)
+    books = db.session.scalars(stmt).all()
+    return BookSchema(many=True).dump(books), 200
+
+# GET all books at specific location
+@books_bp.route('/location/<int:location_id>', methods=['GET'])
+def get_books_by_location(location_id):
+    stmt = db.select(Book).join(User).filter(User.location_id == location_id)# using SQLAlchemy's join function to join users and books based on location
     books = db.session.scalars(stmt).all()
     return BookSchema(many=True).dump(books), 200
