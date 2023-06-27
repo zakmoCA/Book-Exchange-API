@@ -9,10 +9,10 @@ class Transaction(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     requester_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    provider_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    provider_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     requested_book_id = db.Column(db.Integer, db.ForeignKey('books.id'), nullable=False)
-    provided_book_id = db.Column(db.Integer, db.ForeignKey('books.id'), nullable=False)
-    status = db.Column(db.String(30))
+    provided_book_id = db.Column(db.Integer, db.ForeignKey('books.id'), nullable=True)
+    status = db.Column(db.String(30), default='Requested')
 
     requester = db.relationship('User', back_populates='requested_transactions', foreign_keys=[requester_id])
     provider = db.relationship('User', back_populates='provided_transactions', foreign_keys=[provider_id])
