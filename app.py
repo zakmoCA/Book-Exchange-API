@@ -2,6 +2,7 @@ from flask import Flask
 from os import environ
 from init import db, ma, bcrypt, jwt
 from blueprints.cli_bp import cli_bp
+from blueprints.books_bp import books_bp
 
 
 #This is a factory function, a function whose job is to create and configure, and return an object
@@ -18,6 +19,7 @@ def create_app():
     bcrypt.init_app(app)
 
     app.register_blueprint(cli_bp)
+    app.register_blueprint(books_bp)
 
     # Using 'flask run' will run the app as long as this file is called app.py
     # and as long as our code is wrapped inside a 'create_app()' function
