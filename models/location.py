@@ -11,7 +11,7 @@ class Location(db.Model):
     state = db.Column(db.String(100))
     country = db.Column(db.String(100))
 
-    users = db.relationship('User', backref='location', lazy='dynamic')
+    users = db.relationship('User', back_populates='location')
 
 class LocationSchema(ma.Schema):
     city = fields.String(required=True, validate=Length(min=1, max=100))

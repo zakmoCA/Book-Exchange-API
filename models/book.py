@@ -10,8 +10,13 @@ class Book(db.Model):
     author = db.Column(db.String(100))
     genre = db.Column(db.String(100), nullable=True)
     publication_year = db.Column(db.Integer, nullable=True)
-
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+
+    owner = db.relationship('User', back_populates='user_books')
+    requested_transactions = db.relationship('Transaction', back_populates='requested_book', foreign_keys='Transaction.requested_book_id')
+    provided_transactions = db.relationship('Transaction', back_populates='provided_book', foreign_keys='Transaction.provided_book_id')
+
 
 
 class BookSchema(ma.Schema):

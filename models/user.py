@@ -11,8 +11,11 @@ class User(db.Model):
     password = db.Column(db.String(128))
     location_id = db.Column(db.Integer, db.ForeignKey('locations.id'), nullable=False)
 
-    books = db.relationship('Book', backref='owner', lazy='dynamic')
-    transactions = db.relationship('Transaction', backref='user', lazy='dynamic')
+    location = db.relationship('Location', back_populates='users')
+    user_books = db.relationship('Book', back_populates='owner')
+    requested_transactions = db.relationship('Transaction', back_populates='requester', foreign_keys='Transaction.requester_id')
+    provided_transactions = db.relationship('Transaction', back_populates='provider', foreign_keys='Transaction.provider_id')
+
 
 class UserSchema(ma.Schema):
     username = fields.String(required=True, validate=Length(min=3, max=100, error='Username must be between 3 and 100 characters long'))

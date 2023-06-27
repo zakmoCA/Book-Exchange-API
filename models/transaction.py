@@ -14,6 +14,11 @@ class Transaction(db.Model):
     provided_book_id = db.Column(db.Integer, db.ForeignKey('books.id'), nullable=False)
     status = db.Column(db.String(30))
 
+    requester = db.relationship('User', back_populates='requested_transactions', foreign_keys=[requester_id])
+    provider = db.relationship('User', back_populates='provided_transactions', foreign_keys=[provider_id])
+    requested_book = db.relationship('Book', back_populates='requested_transactions', foreign_keys=[requested_book_id])
+    provided_book = db.relationship('Book', back_populates='provided_transactions', foreign_keys=[provided_book_id])
+
 class TransactionSchema(ma.Schema):
     requester_id = fields.Integer(required=True)
     provider_id = fields.Integer(required=True)

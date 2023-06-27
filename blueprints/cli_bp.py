@@ -2,6 +2,8 @@ from flask import Blueprint
 from init import db, bcrypt
 from models.user import User
 from models.book import Book
+from models.location import Location
+from models.transaction import Transaction
 from datetime import date
 
 cli_bp = Blueprint('db', __name__)
@@ -14,11 +16,22 @@ def create_db():
 
 @cli_bp.cli.command('seed')
 def seed_db():
+    melbourne = Location(
+        city = 'Melbourne',
+        state = 'VIC',
+        country = 'Australia'
+        )
+    #commit and add to session
+    db.session.add(melbourne)
+    db.session.commit()
+
+    
     users = [
         User(
         username='TestUser1',
         email='testuser1@spam.com',
-        password=bcrypt.generate_password_hash('password').decode('utf-8')
+        password=bcrypt.generate_password_hash('password').decode('utf-8'),
+        location_id = melbourne.id
         )
     ]
 
@@ -31,7 +44,8 @@ def seed_db():
         title = 'Harry Potter',
         author = 'JK Rowling',
         genre = 'Fantasy',
-        publication_year = 1996
+        publication_year = 1996,
+        owner_id = users[0].id
         )
     ]
 
