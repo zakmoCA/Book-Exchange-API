@@ -25,3 +25,12 @@ def one_book(book_id):
         return {"error": "Book not found"}, 404
     return BookSchema().dump(book), 200
 
+# SEARCH for a book via title (author next?)
+@books_bp.route('/search', methods=['GET'])
+def search_books():
+    search_query = request.args.get('query')
+  
+    # using SQLAlchemy's ilike function for case insensitive search
+    stmt = db.select(Book).filter(Book.title.ilike(f"%{search_query}%")) # THINK ABOUT SETTING LOWER BOUNDS FOR LENGTH OF SEARCH QUERY
+    books = db.session.scalars(stmt).all()
+    return BookSchema(many=True).dump(books), 200
