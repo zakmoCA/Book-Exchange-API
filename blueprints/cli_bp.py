@@ -32,6 +32,12 @@ def seed_db():
         email='testuser1@spam.com',
         password=bcrypt.generate_password_hash('password').decode('utf-8'),
         location_id = melbourne.id
+        ),
+        User(
+        username='TestUser2',
+        email='testuser2@spam.com',
+        password=bcrypt.generate_password_hash('password').decode('utf-8'),
+        location_id = melbourne.id
         )
     ]
 
@@ -56,6 +62,17 @@ def seed_db():
     db.session.add_all(books)
     
     # Commit the transaction to the database
+    db.session.commit()
+
+    transactions = [
+        Transaction(
+        requester_id = users[1].id,
+        requested_book_id = books[0].id
+        )
+    ]
+
+    db.session.query(Transaction).delete()
+    db.session.add_all(transactions)
     db.session.commit()
 
     print('Models seeded')

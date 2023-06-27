@@ -4,6 +4,7 @@ from init import db, ma, bcrypt, jwt
 from blueprints.cli_bp import cli_bp
 from blueprints.books_bp import books_bp
 from blueprints.users_bp import users_bp
+from blueprints.transaction_bp import transactions_bp
 
 
 #This is a factory function, a function whose job is to create and configure, and return an object
@@ -22,6 +23,7 @@ def create_app():
     app.register_blueprint(cli_bp)
     app.register_blueprint(books_bp)
     app.register_blueprint(users_bp)
+    app.register_blueprint(transactions_bp)
 
     # Using 'flask run' will run the app as long as this file is called app.py
     # and as long as our code is wrapped inside a 'create_app()' function
