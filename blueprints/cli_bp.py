@@ -28,15 +28,28 @@ def seed_db():
     
     users = [
         User(
-        username='TestUser1',
-        email='testuser1@spam.com',
-        password=bcrypt.generate_password_hash('password').decode('utf-8'),
+        username='Admin',
+        email='admin@test.com',
+        password=bcrypt.generate_password_hash('adminpass').decode('utf-8'),
+        location_id = melbourne.id,
+        is_admin=True
+        ),
+        User(
+        username='Clayton Bigsby',
+        email='cbigsby@test.com',
+        password=bcrypt.generate_password_hash('cbigsbypass').decode('utf-8'),
         location_id = melbourne.id
         ),
         User(
-        username='TestUser2',
-        email='testuser2@spam.com',
-        password=bcrypt.generate_password_hash('password').decode('utf-8'),
+        username='Ashy Larry',
+        email='alarry@test.com',
+        password=bcrypt.generate_password_hash('alarrypass').decode('utf-8'),
+        location_id = melbourne.id
+        ),
+        User(
+        username='Silky Johnson',
+        email='sjohnson@test.com',
+        password=bcrypt.generate_password_hash('cbigsbypass').decode('utf-8'),
         location_id = melbourne.id
         )
     ]
@@ -52,6 +65,34 @@ def seed_db():
         genre = 'Fantasy',
         publication_year = 1996,
         owner_id = users[0].id
+        ),
+        Book(
+        title = 'Dominion',
+        author = 'Tom Holland',
+        genre = 'History',
+        publication_year = 2019,
+        owner_id = users[1].id
+        ),
+        Book(
+        title = 'Energy and Civilization: A History',
+        author = 'Vaclav Smil',
+        genre = 'History',
+        publication_year = 2017,
+        owner_id = users[3].id
+        ),
+        Book(
+        title = 'The Beginning of Infinity',
+        author = 'David Deutsch',
+        genre = 'Physics, Pop Science',
+        publication_year = 2011,
+        owner_id = users[2].id
+        ),
+        Book(
+        title = 'This Is Goint to Hurt: Secret Diaries of a Junior Doctor',
+        author = 'Adam Kay',
+        genre = 'Memoir',
+        publication_year = 2017,
+        owner_id = users[3].id
         )
     ]
 
