@@ -1,9 +1,11 @@
 from flask import Blueprint, request
 from models.book import Book, BookSchema
-from models.location import Location, LocationSchema
-from models.user import User, UserSchema
+from models.user import User
 from init import db
 from sqlalchemy import or_
+from blueprints.auth_bp import admin_required, admin_or_owner_required
+from flask_jwt_extended import get_jwt_identity, jwt_required
+from sqlalchemy.exc import IntegrityError
 
 books_bp = Blueprint('books', __name__, url_prefix='/books') # prefix means we don't need to include 'books' in the routes
 
@@ -49,3 +51,21 @@ def get_books_by_location(location_id):
     stmt = db.select(Book).join(User).filter(User.location_id == location_id)# using SQLAlchemy's join function to join users and books based on location
     books = db.session.scalars(stmt).all()
     return BookSchema(many=True).dump(books), 200
+
+# ADD a book
+@books_bp.route('/', methods=['POST'])
+@jwt_required()  
+def add_book():
+    user_id = get_jwt_identity()  # Gets the ID of the currently authenticated user from the JWT
+    
+    book_info = BookSchema().load(request.json)  # Loads the JSON data from the request into the BookSchema
+    
+    book_info['owner_id'] = user_id  # Sets the owner_id field of the book to be the ID of the currently authenticated user
+    book = Book(**book_info)  # Creates a new Book object with the data loaded from the request
+    db.session.add(book)  # Adds the new book to the database session
+    try:
+        db.session.commit() 
+    except IntegrityError:  # This exception is raised if there is a conflict, such as trying to add a book with a title that already exists in the database
+        db.session.rollback()  # If there is a conflict, the changes are rolled back
+        return {"error": "A book with this information already exists"}, 400  # An error message is returned with a 400 Bad Request status code
+    return BookSchema().dump(book), 201  # If there is no conflict, the new book is returned in the response, along with a 201 Created status code

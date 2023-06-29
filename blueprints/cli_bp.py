@@ -109,6 +109,14 @@ def seed_db():
         Transaction(
         requester_id = users[1].id,
         requested_book_id = books[0].id
+        ),
+        Transaction(
+        requester_id = users[2].id,
+        requested_book_id = books[2].id
+        ),
+        Transaction(
+        requester_id = users[3].id,
+        requested_book_id = books[2].id
         )
     ]
 
