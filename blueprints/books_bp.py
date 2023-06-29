@@ -69,3 +69,15 @@ def add_book():
         db.session.rollback()  # If there is a conflict, the changes are rolled back
         return {"error": "A book with this information already exists"}, 400  # An error message is returned with a 400 Bad Request status code
     return BookSchema().dump(book), 201  # If there is no conflict, the new book is returned in the response, along with a 201 Created status code
+
+# DELETE a book
+@books_bp.route('/<int:book_id>', methods=['DELETE'])
+@jwt_required()  
+def delete_book(book_id):  # Passing book_id to the funciton
+    user_id = get_jwt_identity()  # Gets the ID of the currently authenticated user from the JWT
+    book = Book.query.get_or_404(book_id)  # Retrieves the book with the given ID from the database, or returns a 404 not found code if it doesn't exist
+    if book.owner_id != user_id:  # If the ID of the book's owner is not the same as the ID of the currently authenticated user
+        return {"error": "You do not have permission to delete this book"}, 403  # an error message is returned with a 403 Forbidden status code
+    db.session.delete(book)  # The book is deleted from the database session
+    db.session.commit()  # The changes are committed to the database
+    return {"message": "Book deleted"}, 204  # Success message is returned with a 204 No Content status code
