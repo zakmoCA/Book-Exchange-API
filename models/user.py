@@ -14,9 +14,9 @@ class User(db.Model):
 
 
     location = db.relationship('Location', back_populates='users')
-    user_books = db.relationship('Book', back_populates='owner')
-    requested_transactions = db.relationship('Transaction', back_populates='requester', foreign_keys='Transaction.requester_id')
-    provided_transactions = db.relationship('Transaction', back_populates='provider', foreign_keys='Transaction.provider_id')
+    user_books = db.relationship('Book', back_populates='owner', cascade='delete')
+    requested_transactions = db.relationship('Transaction', back_populates='requester', foreign_keys='Transaction.requester_id', cascade='delete')
+    provided_transactions = db.relationship('Transaction', back_populates='provider', foreign_keys='Transaction.provider_id', cascade='delete')
 
 
 class UserSchema(ma.Schema):
