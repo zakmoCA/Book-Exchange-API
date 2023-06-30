@@ -60,3 +60,21 @@ def request_book():
     db.session.add(transaction)
     db.session.commit()
     return TransactionSchema().dump(transaction), 201
+
+# ACCEPT a request
+@transactions_bp.route('/accept/<int:transaction_id>', methods=['PUT'])
+@jwt_required()
+def accept_request(transaction_id):
+    # Get the logged-in user's id
+    user_id = get_jwt_identity()
+    # Retrieve the transaction with the given ID, or 404 if it doesn't exist
+    transaction = Transaction.query.get_or_404(transaction_id)
+    # Check if the user is the owner of the requested book
+    if transaction.requested_book.owner_id != user_id:
+        return {"error": "You do not have permission to accept this request"}, 403
+    # Set the status of the transaction to 'Accepted'
+    transaction.status = 'Accepted'
+    transaction.provider_id = user_id
+    transaction.provided_book_id = transaction.requested_book_id
+    db.session.commit()  # Commit the change to the database
+    return TransactionSchema().dump(transaction), 200  # Return the updated transaction
