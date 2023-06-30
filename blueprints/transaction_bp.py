@@ -95,3 +95,19 @@ def cancel_request(transaction_id):
     transaction.status = 'Cancelled'
     db.session.commit()  # Commit the change to the database
     return TransactionSchema().dump(transaction), 200  # Return the updated transaction
+
+# DECLINE a request
+@transactions_bp.route('/decline/<int:transaction_id>', methods=['PUT'])
+@jwt_required()
+def decline_request(transaction_id):
+    # Get the logged-in user's id
+    user_id = get_jwt_identity()
+    # Retrieve the transaction with the given ID, or 404 if it doesn't exist
+    transaction = Transaction.query.get_or_404(transaction_id)
+    # Check if the user is the owner of the requested book
+    if transaction.requested_book.owner_id != user_id:
+        return {"error": "You do not have permission to decline this request"}, 403
+    # Set the status of the transaction to 'Declined'
+    transaction.status = 'Declined'
+    db.session.commit()  # Commit the change to the database
+    return TransactionSchema().dump(transaction), 200  # Return the updated transaction
