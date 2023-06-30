@@ -73,8 +73,25 @@ def accept_request(transaction_id):
     if transaction.requested_book.owner_id != user_id:
         return {"error": "You do not have permission to accept this request"}, 403
     # Set the status of the transaction to 'Accepted'
-    transaction.status = 'Accepted'
-    transaction.provider_id = user_id
-    transaction.provided_book_id = transaction.requested_book_id
+    transaction.status = 'Accepted' # Update transaction status
+    transaction.provider_id = user_id # Set provider_id to logged in user who provided the book
+    transaction.provided_book_id = transaction.requested_book_id # Update provided book ID likewise
+    db.session.commit()  # Commit the change to the database
+    return TransactionSchema().dump(transaction), 200  # Return the updated transaction
+
+
+# UPDATE (cancel) a request
+@transactions_bp.route('/cancel/<int:transaction_id>', methods=['PUT'])
+@jwt_required()
+def cancel_request(transaction_id):
+    # Get the logged-in user's id
+    user_id = get_jwt_identity()
+    # Retrieve the transaction with the given ID, or 404 if it doesn't exist
+    transaction = Transaction.query.get_or_404(transaction_id)
+    # Check if the user is the requester of the transaction
+    if transaction.requester_id != user_id:
+        return {"error": "You do not have permission to cancel this request"}, 403
+    # Set the status of the transaction to 'Cancelled'
+    transaction.status = 'Cancelled'
     db.session.commit()  # Commit the change to the database
     return TransactionSchema().dump(transaction), 200  # Return the updated transaction
