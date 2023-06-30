@@ -49,7 +49,7 @@ def seed_db():
         User(
         username='Silky Johnson',
         email='sjohnson@test.com',
-        password=bcrypt.generate_password_hash('cbigsbypass').decode('utf-8'),
+        password=bcrypt.generate_password_hash('sjohnsonpass').decode('utf-8'),
         location_id = melbourne.id
         )
     ]

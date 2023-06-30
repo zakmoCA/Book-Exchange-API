@@ -58,9 +58,11 @@ def admin_required():
     if not (user and user.is_admin):
         abort(401, description="You must be an admin") 
 
-def admin_or_owner_required(owner_id):
+def admin_or_owner_required(user_id, owner_id):
     user_id = get_jwt_identity()
     stmt = db.select(User).filter_by(id=user_id)
     user = db.session.scalar(stmt)
-    if not (user and (user.is_admin or user_id == owner_id)):
-        abort(401, description="You must be an admin or the owner") 
+    if user and (user.is_admin or user_id == owner_id):
+        return True
+    else:
+        return False
