@@ -3,7 +3,7 @@ from init import db, bcrypt
 from datetime import timedelta
 from models.user import User, UserSchema
 from sqlalchemy.exc import IntegrityError
-from flask_jwt_extended import create_access_token, get_jwt_identity
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
 
  
@@ -50,6 +50,24 @@ def login():
             return {'error': 'Invalid email address or password'}, 401
     except KeyError:
         return {'error': 'Email and password are required'}, 400
+    
+# DELETE user account
+@auth_bp.route('/<int:user_id>', methods=['DELETE'])
+@jwt_required()
+def delete_account(user_id):
+    # Check if user is admin or the owner of the account
+    if not admin_or_owner_required(user_id):
+        return {"error": "Unauthorized"}, 401
+
+    stmt = db.select(User).filter_by(id=user_id)
+    user = db.session.scalar(stmt)
+    if user is None:
+        return {"error": "User not found"}, 404
+
+    db.session.delete(user)
+    db.session.commit()
+
+    return {"message": f"User account {user_id} deleted"}, 200
 
 def admin_required():
     user_id = get_jwt_identity()
@@ -58,7 +76,7 @@ def admin_required():
     if not (user and user.is_admin):
         abort(401, description="You must be an admin") 
 
-def admin_or_owner_required(user_id, owner_id):
+def admin_or_owner_required(owner_id):
     user_id = get_jwt_identity()
     stmt = db.select(User).filter_by(id=user_id)
     user = db.session.scalar(stmt)
