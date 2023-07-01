@@ -56,6 +56,17 @@ If my application grows, scalability could become a concern. Postgres is also no
 
 ### **Models**
 
+#### Relationships
+
+**User:** A user can have multiple books through the  ==‘user_books’== relationship and can also make multiple transaction requests through ‘requested_transactions’ and ‘provided_transactions’. Users also belong to a location through the ‘location’ relationship.
+
+**Book:** Each book belongs to a user through ‘owner’ relationship. Each book can also be involved in multiple transaction requests through ‘requested_transactions’ and ‘provided_transactions’.
+
+**Transaction:** Each transaction involves two users – one who requests the book, through the ‘requester’ relationship, and one who provides the book, through the ‘provider’ relationship. It also involves two books - one which is requested (through the ‘requested_book’ relationship), and one which is provided (through the ‘provided_book’ relationship).
+
+**Location:** Each location can have multiple users associated with it through its ‘users’ relationship.
+
+
 ### **User Model**
   ```py
 
