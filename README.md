@@ -25,6 +25,20 @@ Through this app, users can share their personal libraries, making their books a
 
 # R3	Why have you chosen this database system. What are the drawbacks compared to others?
 
+I have chosen the relational database management system PostgreSQL for my application. Postgres has its advantages and disadvantages, with some of the generic benefits like ACID compliance and JSON support definitely being handy. However I think it is an excellent choice for my application due to the nature of my data. 
+
+### Relational model benefits
+
+The entities in my application (users, books, locations, transactions) have clear relationships and constraints which can be efficiently represented and managed with a relational database. My data being highly structured means it can naturally be organised in tables and columns. The ACID compliance of PostgreSQL also ensures data integrity for transactions, which is critical for my application.
+
+### Transactions
+
+Postgres is ACID compliant, with its atomicity meaning it supports transactions, which provide a safe way to handle multiple database operations at once. For example when a user requests a book, the program might need to update both the user and book tables simultaneously. Transactions allow me to ensure that either both updates succeed, or, if there's an error, neither change is committed, keeping my data consistent.
+
+### Drawbacks
+
+If my application grows, scalability could become a concern. Postgres is also not as user friendly as some other database systems, which poses a steeper learning curve for me, but also will possibly add to development time if I were to collaborate with other developers too. 
+
 # R4	Identify and discuss the key functionalities and benefits of an ORM
 
 # R5	Document all endpoints for your API
