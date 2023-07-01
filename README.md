@@ -65,6 +65,102 @@ This is a simple example, and often the python statements will not be so much sh
 
 ## **R5	Document all endpoints for your API**
 
+### **Auth Routes**
+
+**/auth/users**
+
+**Methods: GET**
+
+
+**/auth/register**
+
+**Methods: POST**
+
+
+**/auth/login**
+
+**Methods: POST**
+
+
+**/auth/<int:user_id>**
+
+**Methods: DELETE**
+
+
+![]()
+
+### **User Routes**
+
+
+### **Book Routes**
+
+### Get all books
+**/books**
+
+**Methods: GET**
+
+
+![]()
+### Get a specific book 
+**/books/<int:book_id>**
+
+**Methods: GET**
+
+
+![]()
+### Search for a book via title/author
+**/books/search**
+
+**Methods: GET**
+
+
+![]()
+### Get all books at a specific locaiton
+**/books/locaiton/<int:locaiton_id>**
+
+**Methods: GET**
+
+
+![]()
+### Add a book
+**/books**
+
+**Methods: POST**
+
+
+![]()
+### Delete a book
+**/books/<int:book_id>**
+
+**Methods: DELETE**
+
+
+![]()
+### Update a book
+**/books/<int:book_id>**
+
+**Methods: PUT**
+
+
+![]()
+
+
+**/route/route**
+
+**Methods: **
+
+
+![]()
+
+### **Transaction Routes**
+
+**/route/route**
+
+**Methods: **
+
+
+![]()
+
 ## **R6	An ERD for your app**
 
 ## **R7	Detail any third party services that your app will use**
