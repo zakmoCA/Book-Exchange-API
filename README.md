@@ -55,7 +55,8 @@ If my application grows, scalability could become a concern. Postgres is also no
 ### Models
 
 ### User Model
-    ```py
+  ```py
+
     class User(db.Model):
         __tablename__ = 'users'
 
@@ -82,13 +83,13 @@ If my application grows, scalability could become a concern. Postgres is also no
         class Meta:
             fields = ('id', 'username', 'email', 'location_id', 'password', 'is_admin')
             ordered = True
-    ```
+```
 
 
 
 
 ### Book Model
-    ```py
+```py
     class Book(db.Model):
         __tablename__ = 'books'
 
@@ -115,13 +116,13 @@ If my application grows, scalability could become a concern. Postgres is also no
         class Meta:
             fields = ('id', 'title', 'author', 'genre', 'publication_year', 'owner_id')
             ordered = True
-    ```
+```
 
 
 
 
 ### Transaction Model
-    ```py
+```py
     VALID_STATUSES = ['Requested', 'Accepted', 'Declined', 'Completed']
 
     class Transaction(db.Model):
@@ -149,13 +150,13 @@ If my application grows, scalability could become a concern. Postgres is also no
         class Meta:
             fields = ('id', 'requester_id', 'provider_id', 'requested_book_id', 'provided_book_id', 'status')
             ordered = True
-    ```
-
+    
+```
 
 
 
 ### Location Model
-    ```py
+```py
     class Location(db.Model):
         __tablename__ = 'locations'
 
@@ -174,7 +175,7 @@ If my application grows, scalability could become a concern. Postgres is also no
         class Meta:
             fields = ('id', 'city', 'state', 'country')
             ordered = True
-    ```
+```
 
 
 
