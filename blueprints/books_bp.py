@@ -30,7 +30,7 @@ def one_book(book_id):
     return BookSchema().dump(book), 200
 
 
-# SEARCH for a book via title (author next?)
+# SEARCH for a book via title or author
 @books_bp.route('/search', methods=['GET'])
 def search_books():
     search_query = request.args.get('query')
