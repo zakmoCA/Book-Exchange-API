@@ -32,17 +32,36 @@ I have chosen the relational database management system PostgreSQL for my applic
 
 ### **Relational model benefits**
 
-The entities in my application (users, books, locations, transactions) have clear relationships and constraints which can be efficiently represented and managed with a relational database. My data being highly structured means it can naturally be organised in tables and columns. The ACID compliance of PostgreSQL also ensures data integrity for transactions, which is critical for my application.
+The entities in my application (users, books, locations, transactions) have clear relationships and constraints which can be efficiently represented and managed with a relational database. My data being highly structured means it can naturally be organised in tables and columns (Dhruv, 2019). The ACID compliance of PostgreSQL also ensures data integrity for transactions, which is critical for my application (Cloud Infrastructure Services, 2022).
 
 ### **Transactions**
 
-Postgres is ACID compliant, with its atomicity meaning it supports transactions, which provide a safe way to handle multiple database operations at once. For example when a user requests a book, the program might need to update both the user and book tables simultaneously. Transactions allow me to ensure that either both updates succeed, or, if there's an error, neither change is committed, keeping my data consistent.
+Postgres is ACID compliant, with its atomicity meaning it supports transactions, which provide a safe way to handle multiple database operations at once. For example when a user requests a book, the program might need to update both the user and book tables simultaneously (brandur.org, n.d.). Transactions allow me to ensure that either both updates succeed, or, if there's an error, neither change is committed, keeping my data consistent.
 
 ### **Drawbacks**
 
-If my application grows, scalability could become a concern. Postgres is also not as user friendly as some other database systems, which poses a steeper learning curve for me, but also will possibly add to development time if I were to collaborate with other developers too. 
+If my application grows, scalability could become a concern, and one of PostgreSQL's limitations is the relative lack of support for horiozntal scaling (Rathbone, 2023). Postgres is also not as user friendly as some other database systems, which poses a steeper learning curve for me, but also will possibly add to development time if I were to collaborate with other developers too. 
 
 ## **R4	Identify and discuss the key functionalities and benefits of an ORM**
+
+An object-relational mapper (ORM) provides a way for programmers to interact with relational databases without having to write structured query language (SQL). This is done with an object-oriented language like Python. It can use models (classes) to serve as an abstraction for our tables in the database, along with being able to design schemas and set rules for our table data. Consider we wanted to grab our user attributes for a specific user using an SQL query:
+
+    "SELECT id, username, email, location FROM users WHERE id = 1"
+
+Contrast this to:
+
+    users.GetById(1)
+
+This is a simple example, and often the python statements will not be so much shorter than the AQL query, but they are much easier to understand, read, and reason about for the python programmer who isn’t also very proficient in SQL.
+
+**Benefits of an ORM** (Contributor, 2022)
+
+- Database Independence: the abstraction layer ORMs provide between the application code and the database makes the application database agnostic, meaning it can be switched to another relational database management system with minimal changes to the code.
+  - This has the added benefit of allowing developers to work in programming languages they are comfortable with, as not all developers may be proficient in something like SQL.
+- ORMs lead to cleaner and more maintainable code 
+- ORMs often have protections against SQL injection attacks built-in
+- ORMs can keep track of changes to the model classes and map them to our database structure, in a process known as Migration
+
 
 ## **R5	Document all endpoints for your API**
 
@@ -241,7 +260,7 @@ In terms of deadlines and priorities, my highest priority tasks were in order;
 
 Doing the above things allows me to complete the core functionality of my application while meeting the minimum requirements for the product. I generally complete all projects with the same workflow, in the order of tasks of greatest complexity to least complexity. Tasks are therefore 'prioritised' by my perceived complexity of delivering, which involves both development time and the number of components which rely on said task.
 
-Tasks which were of greatest priority were performed first, with orange tags being added to those tags in Trello to denote urgency. As usual deadlines for the most important tasks were first to ensure as much time as possible could be allocated to them should difficulties arise.
+Tasks which were of greatest priority were performed first. As usual deadlines for the most important tasks were first to ensure as much time as possible could be allocated to them should difficulties arise.
 
 ![Deliverables Deadlines](/docs/first-deliverables.png)
 
@@ -260,3 +279,11 @@ Tracking was straight forward, I would return to my trello board each day to see
 As can be noted, the colour coding of orange for approaching deadline and red for past due tasks is useful visually in keeping track of timelines. I didn't really colour code tasks for this project like in past projects, as individual task deadlines served what is essentially the same purpose.
 
 ## References
+
+- ‌Cloud Infrastructure Services. (2022). MySQL vs PostgreSQL - What’s the Difference (Pros and Cons). [online] Available at: https://cloudinfrastructureservices.co.uk/mysql-vs-postgresql/.
+- ‌Dhruv, S. (2019). Pros and Cons of using PostgreSQL for Application Development. [online] Aalpha. Available at: https://www.aalpha.net/blog/pros-and-cons-of-using-postgresql-for-application-development/.
+- brandur.org. (n.d.). How Postgres Makes Transactions Atomic. [online] Available at: https://brandur.org/postgres-atomicity [Accessed 24 Jun. 2023].
+- Rathbone, M. (2023). PostgreSQL limitations. [online] Beekeeper Studio. Available at: https://www.beekeeperstudio.io/blog/postgresql-limitations#:~:text=One%20of%20the%20main%20limitations [Accessed 24 Jun. 2023].
+
+‌
+
