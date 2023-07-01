@@ -58,13 +58,13 @@ If my application grows, scalability could become a concern. Postgres is also no
 
 #### Relationships
 
-**User:** A user can have multiple books through the  ==‘user_books’== relationship and can also make multiple transaction requests through ‘requested_transactions’ and ‘provided_transactions’. Users also belong to a location through the ‘location’ relationship.
+**User:** A user can have multiple books through the *'user_books'* relationship and can also make multiple transaction requests through *‘requested_transactions’* and *‘provided_transactions’*. Users also belong to a location through the ‘location’ relationship.
 
-**Book:** Each book belongs to a user through ‘owner’ relationship. Each book can also be involved in multiple transaction requests through ‘requested_transactions’ and ‘provided_transactions’.
+**Book:** Each book belongs to a user through *‘owner’* relationship. Each book can also be involved in multiple transaction requests through *‘requested_transactions’* and *‘provided_transactions’*.
 
-**Transaction:** Each transaction involves two users – one who requests the book, through the ‘requester’ relationship, and one who provides the book, through the ‘provider’ relationship. It also involves two books - one which is requested (through the ‘requested_book’ relationship), and one which is provided (through the ‘provided_book’ relationship).
+**Transaction:** Each transaction involves two users – one who requests the book, through the *‘requester’* relationship, and one who provides the book, through the *‘provider’* relationship. It also involves two books - one which is requested (through the *‘requested_book’* relationship), and one which is provided (through the *‘provided_book’* relationship).
 
-**Location:** Each location can have multiple users associated with it through its ‘users’ relationship.
+**Location:** Each location can have multiple users associated with it through its *‘users’* relationship.
 
 
 ### **User Model**
@@ -194,6 +194,23 @@ If my application grows, scalability could become a concern. Postgres is also no
 
 
 ## **R9	Discuss the database relations to be implemented in your application**
+
+My application will primarily involve the management of a book sharing system. Users will be adding, deleting, editing, requesting and providing books. Users will therefore be interacting with books they own, as well as be requesting books owned by others. Transactions, which encapsulate these interactions, will need to reference both the requester and provider of books. 
+
+My database relationships therefore can be established as follows: 
+
+- **Users** are tied to books in a *one-to-many* relationship (one user can own multiple books) 
+- **Locations** and users in a *one-to-many* relationship (one location can have multiple users)
+- Although the **Transaction** model is managing what can be considered to a many to many relationship between the User and Book models, each of the actual ‘transactions’ involve two users and two books, technically forming a series of *one-to-one* relationships
+  - A single user can request multiple books, and a single book can be requested multiple times by multiple users
+  - Each transaction (row) in the transaction table is a one to one relationship however, one specific user requesting one specific book
+
+I thought about modelling the ‘transaction’ more holistically, by also modelling a ‘complete’ transaction, as opposed to considering both the ‘requesting’ and ‘providing’ of books by users as transactions. My current design does not capture the full exchange process within a single transaction, which could be a potential downside if the scope of my application ever expanded as such that having an entire exchange encapsulated would be important. However, I went with my ‘requester’ and ‘provider’ transaction model for several reasons:
+
+- **Simplicity:** Each transaction is tied to a single user and a single book. This is straightforward and makes it easy to add new transactions, look up requests by a user or requests for a book.
+- **Clarity of state:** A transaction clearly represents a state in the system. It's either a request or a provision. This makes it easy to query the system's state, for example, to find all ‘outstanding requests’.
+- **Flexibility for Users:** By treating requests and provisions as separate transactions, my design gives users flexibility to manage their interactions. A user could decide to withdraw a request before it is fulfilled, or decide not to fulfil a request, without affecting other parts of the system.
+- **Scalability:** The simplicity of the model allows it to easily accommodate growth in the number of users, books, and transactions. Each new transaction is just a new row in the database, regardless of the number of users or books.
 
 ## **R10	Describe the way tasks are allocated and tracked in your project**
 
