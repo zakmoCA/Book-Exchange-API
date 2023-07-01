@@ -215,9 +215,20 @@ Doing the above things allows me to complete the core functionality of my applic
 
 Tasks which were of greatest priority were performed first, with orange tags being added to those tags in Trello to denote urgency. As usual deadlines for the most important tasks were first to ensure as much time as possible could be allocated to them should difficulties arise.
 
-#### Tracking
+![Deliverables Deadlines](/docs/first-deliverables.png)
 
+As can be seen above, the order in which tasks were completed mapped to their deadlines ie. planning --> erd design --> modelling --> blueprints.
 
+#### **Tracking**
 
+Tracking was straight forward, I would return to my trello board each day to see what upcoming deadlines I have, and work on those deliverables, moving them from the 'To do' column to 'Doing' and then once completed, moving them to the 'Done' column. Below are a couple of examples.
+
+**Day 3**
+![Day 3](/docs/day3.png)
+
+**Day 4**
+![Day 4](/docs/day4.png)
+
+As can be noted, the colour coding of orange for approaching deadline and red for past due tasks is useful visually in keeping track of timelines. I didn't really colour code tasks for this project like in past projects, as individual task deadlines served what is essentially the same purpose.
 
 ## References
