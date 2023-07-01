@@ -91,6 +91,13 @@ This is a simple example, and often the python statements will not be so much sh
 
 ### **User Routes**
 
+### Get all users
+**/users**
+**Methods: GET**
+
+### Get specific user
+**/users/<int:id>**
+**Methods: GET**
 
 ### **Book Routes**
 
@@ -145,21 +152,57 @@ This is a simple example, and often the python statements will not be so much sh
 ![]()
 
 
-**/route/route**
-
-**Methods: **
-
-
-![]()
-
 ### **Transaction Routes**
 
-**/route/route**
+### Get all transactions
+**/transactions**
 
-**Methods: **
+**Methods: GET**
 
 
 ![]()
+
+### Get all transactions for the logged-in user
+**/transactions/user**
+
+**Methods: GET**
+
+
+![]()
+
+### Create a new transaction (request a book)
+**/transactions/request**
+
+**Methods: POST**
+
+
+![]()
+
+### Accept an incoming book request
+**/transactions/accept/<int:transaction_id>**
+
+**Methods: PUT**
+
+
+![]()
+
+### Canceling a book request
+**/transactions/cancel/<int:transaction_id>**
+
+**Methods: PUT**
+
+
+![]()
+
+### Declining a book request
+**/transactions/decline/<int:transaction_id>**
+
+**Methods: PUT**
+
+
+![]()
+
+
 
 ## **R6	An ERD for your app**
 
