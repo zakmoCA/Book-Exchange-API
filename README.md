@@ -69,7 +69,33 @@ This is a simple example, and often the python statements will not be so much sh
 
 ## **R7	Detail any third party services that your app will use**
 
+The third party services involved in this project are:
 
+- SQLAlchemy
+- Psycopg2
+- Flask-Marshmallow
+- Flask-JWT-Extended
+- Python-Dotenv
+
+### **SQLAlchemy**
+
+This is a Python SQL toolkit and Object-Relational Mapping system that handles the heavy lifting of my database interactions in my application. It provides a full suite of well-known enterprise-level persistence patterns, designed for efficient and high-performing database access without having to interact with the databse directly. It allows me to model my application's data as Python classes (models). These models are then used to query the database in a Pythonic way, meaning we can use Python statements instead of writing SQL queries.
+
+### **Psycopg2**
+
+Psycopg2 is the most popular PostgreSQL adapter for the Python programming language. In this application, I'm using it as the underlying engine for SQLAlchemy to communicate with our Postgres database. It enables efficient and safe PostgreSQL operations. It offers many PostgreSQL-specific features.
+
+### **Flask-Marshmallow**
+
+This is an object serialization/deserialization library, and is being used to validate, serialize, and deserialize data going to and from the app's HTTP endpoints. With Flask-Marshmallow, we can easily convert complex data types, such as objects, to Python dictionaries, which can then be converted to JSON format. It also allows me to validate incoming data to make sure it has the right form before using it.
+
+### **Flask-JWT-Extended**
+
+JWT stands for JSON Web Tokens, and is useful for securely transmitting information between parties as a JSON object. My app is using Flask-JWT-Extended for user authentication. When a user logs in with their credentials, they receive a JWT, which they must then include in the headers of their HTTP requests to access protected routes.
+
+### **Python-Dotenv**
+
+This library allows me to utilize a .env file for my environment-specific settings. It's a crucial part of keeping the application secure because it enables me to use environment variables to store sensitive information. This way, I can keep secret keys, database URIs, and other sensitive data out of the codebase. Python-Dotenv reads key-value pairs from a .env file and adds them to the environment variable.
 
 ## **R8	Describe your projects models in terms of the relationships they have with each other**
 
@@ -284,6 +310,8 @@ As can be noted, the colour coding of orange for approaching deadline and red fo
 - ‌Dhruv, S. (2019). Pros and Cons of using PostgreSQL for Application Development. [online] Aalpha. Available at: https://www.aalpha.net/blog/pros-and-cons-of-using-postgresql-for-application-development/.
 - brandur.org. (n.d.). How Postgres Makes Transactions Atomic. [online] Available at: https://brandur.org/postgres-atomicity [Accessed 24 Jun. 2023].
 - Rathbone, M. (2023). PostgreSQL limitations. [online] Beekeeper Studio. Available at: https://www.beekeeperstudio.io/blog/postgresql-limitations#:~:text=One%20of%20the%20main%20limitations [Accessed 24 Jun. 2023].
-
+- Contributor, S. (2022). Why Do We Need Object-Relational Mapping? [online] Software Reviews, Opinions, and Tips - DNSstuff. Available at: https://www.dnsstuff.com/why-do-we-need-object-relational-mapping.
+- 
+‌
 ‌
 
