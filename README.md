@@ -1,6 +1,37 @@
 # Book Exchange Application - (T2A2) API Webserver Project
 
 
+# Installation
+
+In your terminal, navigate to the directory you would like to install this project. You can run the following command to clone the project directory locally. 
+    git clone https://github.com/zakmoCA/Book-Exchange-API.git
+
+Launch the directory in your code editor.
+
+Once there open a new terminal window and connect to the PostgreSQL database like so:
+
+    psql postgres
+
+Create the database:
+    CREATE DATABASE books_exchange;
+
+Connect to database:
+    \c books_exchange;
+
+Create admin account:
+    CREATE USER books_exchange_dev WITH PASSWORD 'blimeyharry';
+
+Grant privileges:
+    GRANT ALL PRIVILEGES ON DATABASE books_exchange to books_exchange_dev;
+
+Next we will create a virtual environment. Open a new terminal window and enter the following:
+    python3 -m venv venv
+    source venv/bin/activate
+
+Next we will install our dependencies:
+    python3 -m pip install -r requirements.txt
+
+
 ## **R1	Identification of the problem you are trying to solve by building this particular app.**
 
 As an avid reader I've always cherished the joy of flipping through pages, getting lost in various worlds and learning about the world around me. However, I can't help but acknowledge the challenges associated with this passion, chief among which is accessibility. 
