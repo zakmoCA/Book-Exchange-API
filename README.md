@@ -206,12 +206,13 @@ This is a simple example, and often the python statements will not be so much sh
 **/books/<int:book_id>**
 
 **Methods: GET**
-- Arguments: None
+- Arguments: book_id
 - Authentication: None
 - Token: None
 - Identifier: book_id
 - Request body: None
-- Request response:
+
+Request response:
 
 ![Get specific book](/docs/get-specific-book.png)
 ### Search for a book via title/author
@@ -219,8 +220,19 @@ This is a simple example, and often the python statements will not be so much sh
 
 **Methods: GET**
 
+- Arguments: Search query
+- Authentication: None
+- Token: None
+- Identifier: None
+- Request body: None
 
-![]()
+Request response (search by author):
+![Search by author example](/docs/search-by-author.png)
+
+Request response (search by title):
+![Search by title example](/docs/search-by-title.png)
+
+
 ### Get all books at a specific locaiton
 **/books/locaiton/<int:locaiton_id>**
 
