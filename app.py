@@ -8,7 +8,7 @@ from blueprints.users_bp import users_bp
 from blueprints.transaction_bp import transactions_bp
 from blueprints.auth_bp import auth_bp
 
-load_dotenv('src/.env') # Load environment variables from .env file
+load_dotenv() # Load environment variables from .env file
 
 #This is a factory function, a function whose job is to create and configure, and return an object
 def create_app():
