@@ -138,7 +138,7 @@ This is a simple example, and often the python statements will not be so much sh
 }
 ```
 
-- Description: 
+- Description: Allows user to sign up with email and password.
 - Request response:
 ```JSON
 {
@@ -167,7 +167,7 @@ This is a simple example, and often the python statements will not be so much sh
     "password": "dummypass"
 }
 ```
-- Description: 
+- Description: Allows user to log in
 - Request response:
 ```JSON
 {
@@ -194,7 +194,7 @@ This is a simple example, and often the python statements will not be so much sh
 - Authorization: Account owner or admin
 - Token: JWT required
 - Identifier: user_id
-- Description: 
+- Description: Admin can delete a user and a user can delete their account.
 - Request body: None
 
 **Request**
@@ -250,7 +250,7 @@ Here we delete the user we created earlier:
 - Token: None
 - Identifier: user_id
 - Request body: None
-- Description: 
+- Description: Get list of all users.
 - Request response:
 
 ![Get specific user](/docs/get-specific-user.png)
@@ -266,7 +266,7 @@ Here we delete the user we created earlier:
 - Authentication: None
 - Token: None
 - Request body: None
-- Description: 
+- Description: Get a list of all books.
 - Request response:
 ```JSON
     [
@@ -321,14 +321,14 @@ Here we delete the user we created earlier:
 - Authentication: None
 - Token: None
 - Identifier: book_id
-- Description: 
+- Description: Get a specific book via its id.
 - Request body: None
 
 Request response:
 
 ![Get specific book](/docs/get-specific-book.png)
 
-### Search for a book via title/author
+### **Search for a book via title/author**
 
 **/books/search**
 
@@ -338,7 +338,7 @@ Request response:
 - Authentication: None
 - Token: None
 - Identifier: None
-- Description: 
+- Description: Search for a book via the title, or author.
 - Request body: None
 
 Request response (search by author):
@@ -361,7 +361,7 @@ All my books currently have the same location; Melbourne.
 - Authentication: None
 - Token: None
 - Identifier: location_id
-- Description: 
+- Description: Get a list of all the books at a given location, as accessed by the location_id
 - Request body: None
 - Request response:
 
@@ -378,7 +378,7 @@ All my books currently have the same location; Melbourne.
 - Authorisation: admin or owner required
 - Token: None
 - Identifier: user_id
-- Description: 
+- Description: User can add a book to their 'library', and admin can add a book to the books table.
 - Request body and response: 
 
 ![Create a book](/docs/book-creation.png)
@@ -394,7 +394,7 @@ All my books currently have the same location; Melbourne.
 - Authorisation: Must be book owner or admin
 - Token: None generated
 - Identifier: book_id, user_id
-- Description: 
+- Description: User can delete their book, and admin can delete a book.
 - Request body: None
 - Request response:
 
@@ -415,7 +415,7 @@ All my books currently have the same location; Melbourne.
 - Authorisation: Must be book owner or admin
 - Token: None generated
 - Identifier: book_id, user_id
-- Description: 
+- Description: Update book details.
 - Request body: None
 - Request response:
 
@@ -423,6 +423,10 @@ All my books currently have the same location; Melbourne.
 
 
 ### **Transaction Routes**
+
+Transactions persist in the database even after being cancelled (cancelled request) or declined (declined request).
+The 'status' of the transaction is all that is changed.
+I want to maintain historical data for the time being, so I can later add functionality for tracking user behaviour, generating reports, and making recommendations.
 
 ### **Get all transactions**
 **/transactions**
@@ -434,7 +438,7 @@ All my books currently have the same location; Melbourne.
 - Token: None
 - Identifier: None
 - Request body: None
-- Description: 
+- Description: Get a list of all current transactions.
 - Request reponse:
 
 ![Get all transactions](/docs/get-all-transactions.png)
@@ -448,7 +452,7 @@ All my books currently have the same location; Melbourne.
 - Authentication: JWT required
 - Token: JWT generated
 - Identifier: user_id
-- Description: 
+- Description: User can view their current transactions
 - Request body: None
 
 Logging in as Mr Bigsby
@@ -469,7 +473,7 @@ Request response:
 - Authentication: JWT required
 - Token: None
 - Identifier: requester_id, requested_book_id
-- Description: 
+- Description: User can request a book which exists in the database.
 
 Currently logged in as Ashy Larry, requesting 'This Is Going To Hurt':
 
@@ -506,7 +510,7 @@ Currently logged in as Ashy Larry, requesting 'This Is Going To Hurt':
 - Authentication: JWT required
 - Token: None
 - Identifier: transaction_id, user_id
-- Description: 
+- Description: User can accept an incoming request for one of their books.
 - Request body: None
 
 We will now log in as Silky Johnson, the owner of the book which Ashy Larry requested,
@@ -539,7 +543,7 @@ and accept the transaction.
 - Token: None generated, jwt identity required
 - Identifier: user_id, transaction_id
 - Request body: None
-- Description: 
+- Description: User can cancel an outgoing book request.
 
 While still logged in as Silky Johnson, we will request a book and then cancel the request.
 
@@ -594,7 +598,7 @@ Request response:
 - Token: None generated, jwt identity required
 - Identifier: user_id, transaction_id
 - Request body: None
-- Description: 
+- Description: User can decline a request for one of their books.
 
 We will now log in as as the admin to decline an incoming book request for one her books.
 

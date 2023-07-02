@@ -15,8 +15,8 @@ def all_books():
     
     # select * from books;
     stmt = db.select(Book).order_by(Book.title.desc())
-    books = db.session.scalars(stmt).all()
-    return BookSchema(many=True).dump(books), 200
+    books = db.session.scalars(stmt).all() # stores book
+    return BookSchema(many=True).dump(books), 200 # if book exists return book object with success code
 
 # GET 1 book
 @books_bp.route('/<int:book_id>')
@@ -24,10 +24,10 @@ def one_book(book_id):
     
     # select * from books;
     stmt = db.select(Book).filter_by(id=book_id)
-    book = db.session.scalar(stmt)
+    book = db.session.scalar(stmt) # stores book
     if book is None:
         return {"error": "Book not found"}, 404
-    return BookSchema().dump(book), 200
+    return BookSchema().dump(book), 200 # if book exists return book object with success code
 
 
 # SEARCH for a book via title or author
@@ -38,12 +38,13 @@ def search_books():
     # using SQLAlchemy's ilike function for case insensitive search
     stmt = db.select(Book).filter(
         or_(# or_ is used to create a SQL query that will match either title or author
-            Book.title.ilike(f"%{search_query}%"), # THINK ABOUT SETTING LOWER BOUNDS FOR LENGTH OF SEARCH QUERY
+            Book.title.ilike(f"%{search_query}%"), 
             Book.author.ilike(f"%{search_query}")
         ))
-    print(stmt)
-    books = db.session.scalars(stmt).all()
-    return BookSchema(many=True).dump(books), 200
+    book = db.session.scalars(stmt).all()
+    if book is None:
+        return {"error": "Book not found"}, 404
+    return BookSchema(many=True).dump(book), 200 # if book exists return book object with success code
 
 # GET all books at specific location
 @books_bp.route('/location/<int:location_id>', methods=['GET'])
