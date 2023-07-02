@@ -77,9 +77,8 @@ def add_book():
 @jwt_required()  
 def delete_book(book_id):  # Passing book_id to the function automatically as it is part of URL
     user_id = get_jwt_identity()  # Gets the ID of the currently authenticated user from the JWT
-    admin_or_owner_required(user_id)
     book = Book.query.get_or_404(book_id)  # Retrieves the book with the given ID from the database, or returns a 404 not found code if it doesn't exist
-    if book.owner_id != user_id:  # If the ID of the book's owner is not the same as the ID of the currently authenticated user
+    if not admin_or_owner_required(user_id):  # If the ID of the book's owner is not the same as the ID of the currently authenticated user
         return {"error": "You do not have permission to delete this book"}, 403  # an error message is returned with a 403 Forbidden status code
     db.session.delete(book)  # The book is deleted from the database session
     db.session.commit()  # The changes are committed to the database
@@ -93,7 +92,7 @@ def update_book(book_id):  # Passing book_id to the function automatically as it
     user_id = get_jwt_identity()  # Gets the ID of the currently authenticated user from the JWT
     book = Book.query.get_or_404(book_id)  # Retrieves the book with the given ID from the database, or returns a 404 not found code if it doesn't exist
     # Check if the user is an admin or the owner of the book
-    if not admin_or_owner_required(user_id, book.owner_id):
+    if not admin_or_owner_required(user_id):
         return {"error": "You do not have permission to update this book"}, 403  # an error message is returned with a 403 Forbidden status code
     book_info = BookSchema().load(request.json)  # Loads the JSON data from the request into the BookSchema
     for key, value in book_info.items():  # This loop goes through each field in the loaded data

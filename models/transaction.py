@@ -24,7 +24,7 @@ class TransactionSchema(ma.Schema):
     provider_id = fields.Integer(load_default=0)
     requested_book_id = fields.Integer(required=True)
     provided_book_id = fields.Integer(load_default=0)
-    status = fields.String(required=True, validate=OneOf(VALID_STATUSES, error=f'Status must be one of: {VALID_STATUSES}'))
+    status = fields.String(load_default=VALID_STATUSES[0], validate=OneOf(VALID_STATUSES, error=f'Status must be one of: {VALID_STATUSES}'))
 
     class Meta:
         fields = ('id', 'requester_id', 'provider_id', 'requested_book_id', 'provided_book_id', 'status')

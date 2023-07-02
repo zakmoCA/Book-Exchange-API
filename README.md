@@ -118,22 +118,110 @@ This is a simple example, and often the python statements will not be so much sh
 **Methods: GET**
 
 
+![Get Users](/docs/auth-users.png)
+
 **/auth/register**
 
 **Methods: POST**
 
+- Arguments: None
+- Authentication: None
+- Token: None
+- Request body: 
+```JSON
+{
+        "email": "createuser@test.com",
+        "username": "dummyuser",
+        "password": "dummypass",
+        "is_admin": false,
+        "location_id": "1"
+}
+```
+
+- Description: 
+- Request response:
+```JSON
+{
+    "email": "createuser@test.com",
+    "id": 5,
+    "is_admin": false,
+    "location_id": "1",
+    "username": "dummyuser"
+}
+```
+
+![Register User](/docs/register-user.png)
 
 **/auth/login**
 
 **Methods: POST**
 
+- Arguments: none
+- Authentication: email and password
+- Token: JWT generated
+- Identifier: email, JWT
+- Request body: 
+```JSON
+{
+    "email": "createuser@test.com",
+    "password": "dummypass"
+}
+```
+- Description: 
+- Request response:
+```JSON
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4ODI5NDkyNywianRpIjoiNmNhZDdiNzYtZmJjOC00ZTQyLTgyM2ItZjRkMjNkZTgwMDMwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NSwibmJmIjoxNjg4Mjk0OTI3LCJleHAiOjE2ODkxNTg5Mjd9.g-n4e1S8cSiAzCQZqJDrAEEojJYASvv-A7-FCJSpBzY",
+    "user": {
+        "email": "createuser@test.com",
+        "id": 5,
+        "is_admin": false,
+        "location_id": "1",
+        "username": "dummyuser"
+    }
+}
+```
 
+![Login endpoint](/docs/login.png)
+
+### **Delete User**
 **/auth/`<int:user_id>`**
 
 **Methods: DELETE**
 
+- Arguments: user_id
+- Authentication: JWT identity
+- Authorization: Account owner or admin
+- Token: JWT required
+- Identifier: user_id
+- Description: 
+- Request body: None
 
-![]()
+**Request**
+
+    http://127.0.0.1:5000/auth/5
+Here we delete the user we created earlier:
+```JSON
+{
+    "email": "createuser@test.com",
+    "id": 5,
+    "is_admin": false,
+    "location_id": "1",
+    "username": "dummyuser"
+}
+```
+**Response**
+
+```JSON
+{
+    "message": "User account 5 deleted"
+}
+```
+
+![User deleted](/docs/user-deleted.png)
+
+
+
 
 ### **User Routes**
 
@@ -141,12 +229,15 @@ This is a simple example, and often the python statements will not be so much sh
 **/users**
 **Methods: GET**
 
-- Arguments: None
-- Authentication: None
-- Token: None
-- Request body: None
-- Description: 
-- Request response:
+```JSON
+{
+    "email": "createuser@test.com",
+    "id": 5,
+    "is_admin": false,
+    "location_id": "1",
+    "username": "dummyuser"
+}
+```
 
 ![Get users](/docs/get-users.png)
 
@@ -236,7 +327,9 @@ This is a simple example, and often the python statements will not be so much sh
 Request response:
 
 ![Get specific book](/docs/get-specific-book.png)
+
 ### Search for a book via title/author
+
 **/books/search**
 
 **Methods: GET**
@@ -249,9 +342,11 @@ Request response:
 - Request body: None
 
 Request response (search by author):
+
 ![Search by author example](/docs/search-by-author.png)
 
 Request response (search by title):
+
 ![Search by title example](/docs/search-by-title.png)
 
 
@@ -259,6 +354,7 @@ Request response (search by title):
 **/books/location/`<int:location_id>`**
 
 **Methods: GET**
+
 All my books currently have the same location; Melbourne.
 
 - Arguments: location_id
@@ -277,22 +373,53 @@ All my books currently have the same location; Melbourne.
 
 **Methods: POST**
 
+- Arguments: none
+- Authentication: jwt required
+- Authorisation: admin or owner required
+- Token: None
+- Identifier: user_id
+- Description: 
+- Request body and response: 
 
-![]()
+![Create a book](/docs/book-creation.png)
+
+
 ### Delete a book
 **/books/`<int:book_id>`**
 
 **Methods: DELETE**
 
+- Arguments: book_id
+- Authentication: jwt required
+- Authorisation: Must be book owner or admin
+- Token: None generated
+- Identifier: book_id, user_id
+- Description: 
+- Request body: None
+- Request response:
 
-![]()
+```JSON
+{
+    "messsage": "Book deleted"
+}
+```
+
+
 ### Update a book
 **/books/`<int:book_id>`**
 
 **Methods: PUT**
 
+- Arguments: book_id
+- Authentication: jwt required
+- Authorisation: Must be book owner or admin
+- Token: None generated
+- Identifier: book_id, user_id
+- Description: 
+- Request body: None
+- Request response:
 
-![]()
+![Update book](/docs/updated-book-details.png)
 
 
 ### **Transaction Routes**
@@ -309,6 +436,7 @@ All my books currently have the same location; Melbourne.
 - Request body: None
 - Description: 
 - Request reponse:
+
 ![Get all transactions](/docs/get-all-transactions.png)
 
 ### **Get all transactions for the logged-in user**
@@ -324,10 +452,12 @@ All my books currently have the same location; Melbourne.
 - Request body: None
 
 Logging in as Mr Bigsby
+
 ![login](/docs/get-my-transactions-login.png)
 
 Getting Mr Bigsby's transactions.
 Request response:
+
 ![get user transactions](/docs/get-my-transactions.png)
 
 ### Create a new transaction (request a book)
@@ -335,13 +465,66 @@ Request response:
 
 **Methods: POST**
 
+- Arguments: None
+- Authentication: JWT required
+- Token: None
+- Identifier: requester_id, requested_book_id
+- Description: 
 
-![]()
+Currently logged in as Ashy Larry, requesting 'This Is Going To Hurt':
+
+- Request body: 
+
+```JSON
+{
+    "requester_id": 1,
+    "requested_book_id": 5
+}
+```
+
+- Request response:
+
+```JSON
+{
+    "id": 4,
+    "provided_book_id": null,
+    "provider_id": null,
+    "requested_book_id": 5,
+    "requester_id": 1,
+    "status": "Requested"
+}
+```
+
+![Request book](/docs/request-book.png)
 
 ### Accept an incoming book request
 **/transactions/accept/`<int:transaction_id>`**
 
 **Methods: PUT**
+
+- Arguments: transaction_id
+- Authentication: JWT required
+- Token: None
+- Identifier: transaction_id, user_id
+- Description: 
+- Request body: None
+
+We will now log in as Silky Johnson, the owner of the book which Ashy Larry requested,
+and accept the transaction.
+
+**Request response:**
+
+```JSON
+{
+    "id": 4,
+    "provided_book_id": 5,
+    "provider_id": 4,
+    "requested_book_id": 5,
+    "requester_id": 1,
+    "status": "Accepted"
+}
+```
+
 
 
 ![]()
@@ -351,20 +534,119 @@ Request response:
 
 **Methods: PUT**
 
+- Arguments: transaction_id
+- Authentication: jwt required
+- Token: None generated, jwt identity required
+- Identifier: user_id, transaction_id
+- Request body: None
+- Description: 
 
-![]()
+While still logged in as Silky Johnson, we will request a book and then cancel the request.
+
+**Request**
+
+```JSON
+{
+    "requester_id": 4,
+    "requested_book_id": 2
+}
+```
+
+**Request response**
+
+```JSON
+{
+    "id": 5,
+    "provided_book_id": null,
+    "provider_id": null,
+    "requested_book_id": 2,
+    "requester_id": 4,
+    "status": "Requested"
+}
+```
+
+![](/docs/request-to-cancel.png)
+
+**Cancel request**
+
+Request response:
+
+```JSON
+{
+    "id": 5,
+    "provided_book_id": null,
+    "provider_id": null,
+    "requested_book_id": 2,
+    "requester_id": 4,
+    "status": "Cancelled"
+}
+```
+
+![](/docs/cancelled-request.png)
 
 ### Declining a book request
 **/transactions/decline/`<int:transaction_id>`**
 
 **Methods: PUT**
 
+- Arguments: transaction_id
+- Authentication: jwt required
+- Token: None generated, jwt identity required
+- Identifier: user_id, transaction_id
+- Request body: None
+- Description: 
 
-![]()
+We will now log in as as the admin to decline an incoming book request for one her books.
+
+**Book**
+
+```JSON
+{
+    "author": "JK Rowling",
+    "genre": "Fantasy",
+    "id": 1,
+    "owner_id": 1,
+    "publication_year": 1996,
+    "title": "Harry Potter"
+}
+```
+
+
+**Book owner**
+
+```JSON
+{
+    "email": "admin@test.com",
+    "id": 1,
+    "is_admin": true,
+    "location_id": "1",
+    "username": "Admin"
+}
+```
+
+
+**Request (transaction)**
+
+```JSON
+{
+    "id": 1,
+    "provided_book_id": null,
+    "provider_id": null,
+    "requested_book_id": 1,
+    "requester_id": 2,
+    "status": "Requested"
+}
+```
+
+**Request response:**
+
+![Declining a book request](/docs/declined-request.png)
 
 
 
 ## **R6	An ERD for your app**
+
+![Application entity relationship diagram](/docs/erd.png)
 
 ## **R7	Detail any third party services that your app will use**
 
@@ -610,7 +892,7 @@ As can be noted, the colour coding of orange for approaching deadline and red fo
 - brandur.org. (n.d.). How Postgres Makes Transactions Atomic. [online] Available at: https://brandur.org/postgres-atomicity [Accessed 24 Jun. 2023].
 - Rathbone, M. (2023). PostgreSQL limitations. [online] Beekeeper Studio. Available at: https://www.beekeeperstudio.io/blog/postgresql-limitations#:~:text=One%20of%20the%20main%20limitations [Accessed 24 Jun. 2023].
 - Contributor, S. (2022). Why Do We Need Object-Relational Mapping? [online] Software Reviews, Opinions, and Tips - DNSstuff. Available at: https://www.dnsstuff.com/why-do-we-need-object-relational-mapping.
-- 
+
 ‌
 ‌
 
