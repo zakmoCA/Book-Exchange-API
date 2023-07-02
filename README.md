@@ -39,6 +39,12 @@ Next we will install our dependencies.
 
     python3 -m pip install -r requirements.txt
 
+Before we create and seed the database, you'll need to set up some environment variables. In the root directory of the project, create a file called .env. Open this file in a text editor and add the following lines, replacing the placeholders with your actual data:
+
+    DB_URI="postgresql+psycopg2://books_exchange_dev:blimeyharry@localhost:5432/books_exchange"
+    JWT_KEY="Your JWT Key Here"
+
+
 Now we will create and seed the database.
 
     flask db create
