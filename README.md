@@ -1,5 +1,6 @@
 # Book Exchange Application - (T2A2) API Webserver Project
 
+# [My Project Management (Trello)](https://trello.com/b/bmhf0mvA/api-webserver)
 
 # Installation
 
@@ -8,35 +9,43 @@ In your terminal, navigate to the directory you would like to install this proje
 
 Launch the directory in your code editor.
 
-Once there open a new terminal window and connect to the PostgreSQL database like so:
+Once there open a new terminal window and connect to the PostgreSQL database like so.
 
     psql postgres
 
-Create the database:
+Create the database.
 
     CREATE DATABASE books_exchange;
 
-Connect to database:
+Connect to database.
 
     \c books_exchange;
 
-Create admin account:
+Create admin account.
 
     CREATE USER books_exchange_dev WITH PASSWORD 'blimeyharry';
 
-Grant privileges:
+Grant privileges.
 
     GRANT ALL PRIVILEGES ON DATABASE books_exchange to books_exchange_dev;
 
-Next we will create a virtual environment. Open a new terminal window and enter the following:
+Next we will create a virtual environment. Open a new terminal window and enter the following.
 
     python3 -m venv venv
     source venv/bin/activate
 
-Next we will install our dependencies:
+Next we will install our dependencies.
 
     python3 -m pip install -r requirements.txt
 
+Now we will create and seed the database.
+
+    flask db create
+    flask db seed
+
+Now run the Flask app.
+
+    flask run
 
 ## **R1	Identification of the problem you are trying to solve by building this particular app.**
 
@@ -143,15 +152,68 @@ This is a simple example, and often the python statements will not be so much sh
 
 **Methods: GET**
 
-
+- Arguments: None
+- Authentication: None
+- Token: None
+- Request body: None
+- Request response:
+```JSON
+    [
+        {
+            "author": "Adam Kay",
+            "genre": "Memoir",
+            "id": 5,
+            "owner_id": 4,
+            "publication_year": 2017,
+            "title": "This Is Goint to Hurt: Secret Diaries of a Junior Doctor"
+        },
+        {
+            "author": "David Deutsch",
+            "genre": "Physics, Pop Science",
+            "id": 4,
+            "owner_id": 3,
+            "publication_year": 2011,
+            "title": "The Beginning of Infinity"
+        },
+        {
+            "author": "JK Rowling",
+            "genre": "Fantasy",
+            "id": 1,
+            "owner_id": 1,
+            "publication_year": 1996,
+            "title": "Harry Potter"
+        },
+        {
+            "author": "Vaclav Smil",
+            "genre": "History",
+            "id": 3,
+            "owner_id": 4,
+            "publication_year": 2017,
+            "title": "Energy and Civilization: A History"
+        },
+        {
+            "author": "Tom Holland",
+            "genre": "History",
+            "id": 2,
+            "owner_id": 2,
+            "publication_year": 2019,
+            "title": "Dominion"
+        }
+    ]
+```
 ![]()
 ### Get a specific book 
 **/books/<int:book_id>**
 
 **Methods: GET**
+- Arguments: None
+- Authentication: None
+- Token: None
+- Identifier: book_id
+- Request body: None
+- Request response:
 
-
-![]()
+![Get specific book](/docs/get-specific-book.png)
 ### Search for a book via title/author
 **/books/search**
 
