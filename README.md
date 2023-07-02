@@ -2,6 +2,8 @@
 
 # [My Project Management (Trello)](https://trello.com/b/bmhf0mvA/api-webserver)
 
+# [Link to project GitHub Repo](https://github.com/zakmoCA/Book-Exchange-API)
+
 # Installation
 
 In your terminal, navigate to the directory you would like to install this project. You can run the following command to clone the project directory locally. 
