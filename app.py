@@ -1,5 +1,6 @@
 from flask import Flask
 from os import environ
+from dotenv import load_dotenv  # Import load_dotenv from python-dotenv
 from init import db, ma, bcrypt, jwt
 from blueprints.cli_bp import cli_bp
 from blueprints.books_bp import books_bp
@@ -7,6 +8,7 @@ from blueprints.users_bp import users_bp
 from blueprints.transaction_bp import transactions_bp
 from blueprints.auth_bp import auth_bp
 
+load_dotenv() # Load environment variables from .env file
 
 #This is a factory function, a function whose job is to create and configure, and return an object
 def create_app():

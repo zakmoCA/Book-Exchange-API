@@ -5,6 +5,7 @@
 # Installation
 
 In your terminal, navigate to the directory you would like to install this project. You can run the following command to clone the project directory locally. 
+
     git clone https://github.com/zakmoCA/Book-Exchange-API.git
 
 Launch the directory in your code editor.
