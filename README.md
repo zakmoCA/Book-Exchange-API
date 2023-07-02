@@ -128,7 +128,7 @@ This is a simple example, and often the python statements will not be so much sh
 **Methods: POST**
 
 
-**/auth/<int:user_id>**
+**/auth/`<int:user_id>`**
 
 **Methods: DELETE**
 
@@ -141,9 +141,28 @@ This is a simple example, and often the python statements will not be so much sh
 **/users**
 **Methods: GET**
 
+- Arguments: None
+- Authentication: None
+- Token: None
+- Request body: None
+- Description: 
+- Request response:
+
+![Get users](/docs/get-users.png)
+
 ### Get specific user
-**/users/<int:id>**
+**/users/`<int:id>`**
 **Methods: GET**
+
+- Arguments: user_id
+- Authentication: None
+- Token: None
+- Identifier: user_id
+- Request body: None
+- Description: 
+- Request response:
+
+![Get specific user](/docs/get-specific-user.png)
 
 ### **Book Routes**
 
@@ -156,6 +175,7 @@ This is a simple example, and often the python statements will not be so much sh
 - Authentication: None
 - Token: None
 - Request body: None
+- Description: 
 - Request response:
 ```JSON
     [
@@ -203,13 +223,14 @@ This is a simple example, and often the python statements will not be so much sh
 ```
 ![]()
 ### Get a specific book 
-**/books/<int:book_id>**
+**/books/`<int:book_id>`**
 
 **Methods: GET**
 - Arguments: book_id
 - Authentication: None
 - Token: None
 - Identifier: book_id
+- Description: 
 - Request body: None
 
 Request response:
@@ -224,6 +245,7 @@ Request response:
 - Authentication: None
 - Token: None
 - Identifier: None
+- Description: 
 - Request body: None
 
 Request response (search by author):
@@ -234,12 +256,22 @@ Request response (search by title):
 
 
 ### Get all books at a specific locaiton
-**/books/locaiton/<int:locaiton_id>**
+**/books/location/`<int:location_id>`**
 
 **Methods: GET**
+All my books currently have the same location; Melbourne.
+
+- Arguments: location_id
+- Authentication: None
+- Token: None
+- Identifier: location_id
+- Description: 
+- Request body: None
+- Request response:
+
+![Get books by location](/docs/get-books-by-location.png)
 
 
-![]()
 ### Add a book
 **/books**
 
@@ -248,14 +280,14 @@ Request response (search by title):
 
 ![]()
 ### Delete a book
-**/books/<int:book_id>**
+**/books/`<int:book_id>`**
 
 **Methods: DELETE**
 
 
 ![]()
 ### Update a book
-**/books/<int:book_id>**
+**/books/`<int:book_id>`**
 
 **Methods: PUT**
 
@@ -265,21 +297,38 @@ Request response (search by title):
 
 ### **Transaction Routes**
 
-### Get all transactions
+### **Get all transactions**
 **/transactions**
 
 **Methods: GET**
 
+- Arguments: None
+- Authentication: None
+- Token: None
+- Identifier: None
+- Request body: None
+- Description: 
+- Request reponse:
+![Get all transactions](/docs/get-all-transactions.png)
 
-![]()
-
-### Get all transactions for the logged-in user
+### **Get all transactions for the logged-in user**
 **/transactions/user**
 
 **Methods: GET**
 
+- Arguments: None
+- Authentication: JWT required
+- Token: JWT generated
+- Identifier: user_id
+- Description: 
+- Request body: None
 
-![]()
+Logging in as Mr Bigsby
+![login](/docs/get-my-transactions-login.png)
+
+Getting Mr Bigsby's transactions.
+Request response:
+![get user transactions](/docs/get-my-transactions.png)
 
 ### Create a new transaction (request a book)
 **/transactions/request**
@@ -290,7 +339,7 @@ Request response (search by title):
 ![]()
 
 ### Accept an incoming book request
-**/transactions/accept/<int:transaction_id>**
+**/transactions/accept/`<int:transaction_id>`**
 
 **Methods: PUT**
 
@@ -298,7 +347,7 @@ Request response (search by title):
 ![]()
 
 ### Canceling a book request
-**/transactions/cancel/<int:transaction_id>**
+**/transactions/cancel/`<int:transaction_id>`**
 
 **Methods: PUT**
 
@@ -306,7 +355,7 @@ Request response (search by title):
 ![]()
 
 ### Declining a book request
-**/transactions/decline/<int:transaction_id>**
+**/transactions/decline/`<int:transaction_id>`**
 
 **Methods: PUT**
 
