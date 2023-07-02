@@ -1,7 +1,6 @@
 from flask import Blueprint, request
 from models.transaction import Transaction, TransactionSchema
-from models.book import Book, BookSchema
-from models.user import User, UserSchema
+from models.book import Book
 from init import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from blueprints.auth_bp import admin_or_owner_required

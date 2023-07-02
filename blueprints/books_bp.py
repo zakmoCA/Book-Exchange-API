@@ -3,7 +3,7 @@ from models.book import Book, BookSchema
 from models.user import User
 from init import db
 from sqlalchemy import or_
-from blueprints.auth_bp import admin_required, admin_or_owner_required
+from blueprints.auth_bp import admin_or_owner_required
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from sqlalchemy.exc import IntegrityError
 

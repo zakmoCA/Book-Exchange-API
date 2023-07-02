@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint
 from models.user import User, UserSchema
 from init import db
 
