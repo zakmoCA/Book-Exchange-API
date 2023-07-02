@@ -13,22 +13,28 @@ Once there open a new terminal window and connect to the PostgreSQL database lik
     psql postgres
 
 Create the database:
+
     CREATE DATABASE books_exchange;
 
 Connect to database:
+
     \c books_exchange;
 
 Create admin account:
+
     CREATE USER books_exchange_dev WITH PASSWORD 'blimeyharry';
 
 Grant privileges:
+
     GRANT ALL PRIVILEGES ON DATABASE books_exchange to books_exchange_dev;
 
 Next we will create a virtual environment. Open a new terminal window and enter the following:
+
     python3 -m venv venv
     source venv/bin/activate
 
 Next we will install our dependencies:
+
     python3 -m pip install -r requirements.txt
 
 
