@@ -56,6 +56,20 @@ Now run the Flask app.
 
     flask run
 
+
+# **PROJECT EXPANSION**
+
+## Frontend
+- [] Login page
+- [] Register page/functionality (can dynamically render on same page)
+- [] (User) Home Page
+- [] Home Page
+- [] Search bar for book search by location on home page
+- [] User Library page 
+
+
+# **INITIAL PROJECT**
+
 ## **R1	Identification of the problem you are trying to solve by building this particular app.**
 
 As an avid reader I've always cherished the joy of flipping through pages, getting lost in various worlds and learning about the world around me. However, I can't help but acknowledge the challenges associated with this passion, chief among which is accessibility. 
