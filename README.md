@@ -60,12 +60,12 @@ Now run the Flask app.
 # **PROJECT EXPANSION**
 
 ## Frontend
-- [] Login page
-- [] Register page/functionality (can dynamically render on same page)
-- [] (User) Home Page
-- [] Home Page
-- [] Search bar for book search by location on home page
-- [] User Library page 
+- [ ] Login page
+- [ ] Register page/functionality (can dynamically render on same page)
+- [ ] (User) Home Page
+- [ ] Home Page
+- [ ] Search bar for book search by location on home page
+- [ ] User Library page 
 
 
 # **INITIAL PROJECT**
