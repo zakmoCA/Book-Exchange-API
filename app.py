@@ -7,6 +7,7 @@ from blueprints.books_bp import books_bp
 from blueprints.users_bp import users_bp
 from blueprints.transaction_bp import transactions_bp
 from blueprints.auth_bp import auth_bp
+from flask_cors import CORS
 
 load_dotenv() # Load environment variables from .env file
 
@@ -14,6 +15,8 @@ load_dotenv() # Load environment variables from .env file
 def create_app():
     app = Flask(__name__)
     # app.debug = True
+
+    CORS(app)
 
     app.config['JWT_SECRET_KEY'] = environ.get('JWT_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URI')
