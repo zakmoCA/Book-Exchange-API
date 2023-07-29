@@ -22,9 +22,9 @@ function Home() {
             <article>c</article>
             <article>d</article>
           </div>
-        </div>
-        <div className="search-container">
-          <input type="text" placeholder="Search for a book..." />
+          <div className="search-container">
+            <input type="text" placeholder="Search for a book..." />
+          </div>
         </div>
         <footer>
           <p>About app</p>
