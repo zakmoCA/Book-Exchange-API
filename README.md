@@ -33,7 +33,7 @@ Next we will create a virtual environment. Open a new terminal window and enter 
     python3 -m venv venv
     source venv/bin/activate
 
-Next we will install our dependencies.
+Next we will install all our dependencies.
 
     python3 -m pip install -r requirements.txt
 
